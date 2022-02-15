@@ -103,7 +103,7 @@
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             gap: 18px;
-            border: 1px solid var(--sencondary);
+            border: 1px solid var(--secondary);
             border-radius: 8px;
             margin: 0 auto;
         }         
@@ -289,7 +289,7 @@
                     arrDecDefault   = Array();
                 } else {
                     //cn.warn("Errore. Il valore inserito non è alfanumerico.")
-                    fnc.showMyAlert("ATTENZIONE", `${question} non è formato corretto o campo vuoto. no spazi`, 'var(--danger)', 'var(--warning)', 'var(--warning)', 'var(--dark)');
+                    fnc.showMyAlert("ATTENZIONE", `${question} formato non corretto o campo vuoto. no spazi`, 'var(--danger)', 'var(--warning)', 'var(--warning)', 'var(--dark)');
                     return false;
                 }
             } catch(Exception) {
