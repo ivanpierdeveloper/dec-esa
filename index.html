@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<!-- <html lang="en"> -->
+<html lang="it">
+
+<head>
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'none' ; script-src resource:; "> -->
+    <meta charset="utf-8">
+    <meta http-equiv="content-language" content="IT">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="iVandamme">
+    <meta name="author" content="https://ivanpierdeveloper.it">
+    <meta name="keywords" content="app, decimale a esadecimale">
+    <link rel="shortcut icon" href="img/all/favicon.png" type="image/x-icon" sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="docs/css/root.css">
+    <link rel="stylesheet" type="text/css" href="docs/css/my-alert.css">
+    <link rel="stylesheet" href="docs/css/style.css">
+    <link rel="stylesheet" href="docs/css/media-query.css">
+    <link rel="stylesheet" href="docs/css/tooltip.css" type="text/css">
+    <title>Home | Esa-Dec</title>
+    <style type="text/css">
+        table {
+            table-layout: fixed;
+            width: 100%;
+            word-wrap: break-word;
+            height: auto;
+            color: var(--yellow);
+        }
+        
+        table caption {
+            color: var(--white);
+            text-align: center;
+        }
+        
+        table th {
+            border: 1px solid var(--danger);
+        }
+        
+        table td {
+            border: 1px solid var(--orange);
+            text-align: center;
+            font-size: 8pt;
+        }
+        
+        
+        .name {
+            padding: 18px;
+            border: 1px solid var(--white);
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-top: 5px;
+            position: relative;
+        }
+        
+        .name span {
+            width: 40%;
+            position: absolute;
+            left: 30%;
+            top: 25%;
+        }
+
+        .grid {
+            width: 80%;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 18px;
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+       .grid-esadecimale {
+            width: 80%;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 18px;
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .grid-add-esadecimale, .grid-add-decimale {
+            width: 80%;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 18px;
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+        h5 {
+            color: var(--silver);
+            font-weight: bold;
+        }
+        .grid-decimale {
+            width: 80%;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 18px;
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            margin: 0 auto;
+        }         
+		.grid-button-goto {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 18px;
+            padding: 18px;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="full-screen"></div>
+    <!-- ./full-screen -->
+    <div class="my-alert"></div>
+    <!-- ./my-alert -->
+	<div class="my-alert-message"></div>
+	<!-- ./my-alert-message -->
+    <div class="loader"></div>
+    <!-- loader-->
+    <div class="loader-text"></div>
+    <!-- loader-text -->
+    <div class="container">
+		<div class="grid-button-goto">
+            <div class="tooltip">
+                <span class="tooltiptext">può interresarti anche questo???</span>
+                <button class="btn btn-p"
+                onclick='javascript:window.open(`https://ivanpierdeveloper.github.io/calc-all/`)'>binario, hex, decimale e ottale</button>
+            </div>
+        </div><!-- grid-button-goto -->
+        <h1 class="root-text-indianred root-text-align-center root-text-color-blue">esadecimale e/o decimale</h1>
+        <hr />
+        <center><h5>decimale a esadecimale</h5></center>
+        <div class="grid-esadecimale">
+            <!--
+            <button class="btn btn-s show-my-alert" onclick="javascript:alertDefault(`HELLO WORD`);">my alert</button>
+            <button class="btn btn-i loader-my-alert" onclick="javascript:alertLoad();">loader</button>
+            <button class="btn btn-p loader-my-alert-text" onclick="javascript:alertLoadText('testo di prova', 'img/loader/loading-buffering.gif');">loader text</button>
+            <button class="btn btn-w my-alert-w" onclick="javascript:alertWarning(`HELLO WORD`);">warning</button>
+            <button class="btn btn-d my-alert-d" onclick="javascript:alertDanger(`HELLO WORD`);">danger</button>
+            <div class="tooltip">
+                <span class="tooltiptext">alert personalizza</span>
+                <button class="btn btn-c my-alert-d" onclick="javascript:alertCustomized(`HELLO WORD`);">customized</button>
+            </div>
+            -->
+            <!-- questo è l'ordine con cui prosegue da 0 a F -->
+            <div class="tooltip">
+                <span class="tooltiptext">calcola</span>
+                <button class="btn btn-p" onclick="javascript:calcoloEsa();">esadecimale</button>
+            </div>
+            <div class="tooltip">
+                <span class="tooltiptext">pulisci</span>
+                <button class="btn btn-d" onclick="javascript:domClear();">ripristina</button>
+            </div>          
+        </div><!-- ./grid-esadecimale -->
+        <center><h5>risultato decimale a esadecimale</h5></center>
+        <div class="grid-add-esadecimale root-hidden"></div>
+        <hr />
+        <center><h5>esadecimale a decimale</h5></center>
+        <div class="grid-decimale">
+            <!-- questo è l'ordine con cui prosegue da 0 a F -->
+            <input type="customized" class="value-esadecimale" onkeyup="javascript:verifyKeyUp()"
+            placeholder="esadecimale">
+            <span class="root-text-color-secondary root-font-pt-10" style="display: block;">
+                scrivi il valore esadecimale solo alfanumerico e senza spazi es. 22A o 22a
+            </span>
+            <div class="tooltip">
+                <span class="tooltiptext">calcola</span>
+                <button class="btn btn-p" onclick="javascript:calcoloDec();">decimale</button>
+            </div>
+            <div class="tooltip">
+                <span class="tooltiptext">pulisci</span>
+                <button class="btn btn-d" onclick="javascript:domClear();">ripristina</button>
+            </div>          
+        </div><!-- ./grid-decimale -->
+        <center><h5>risultato esadecimale a decimale</h5></center>
+        <div class="grid-add-decimale root-hidden"></div>
+    </div>
+    <!-- ./container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+    <!-- ./lib google ajax -->
+    <script lang="javascript" src="docs/js/my-alert.js" defer></script>
+    <!-- my-alert js -->
+    <!-- (defer) non accesso dall'esterno -->
+    <script lang="javascript" src="docs/js/script.js" defer></script>
+    <!-- script js -->
+    <script lang="javascript">
+        'use strict'
+         // questo è l'ordine con cui prosegue da 0 a F.
+        const alfanumerico = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
+        var valueInput = document.querySelector('.value-esadecimale');
+        function calcoloEsa() {
+            try {
+                cn.clear();
+                var decimale = new Number();
+                decimale = prompt("Scrivere solo numeri interi es. 10.00 = 1000"); //,null);
+                if(decimale) {
+                    var numA    = new Number();
+                    var numB    = new Number();
+                    var numC    = new Number();
+                    var numD    = new Number();
+                    var arrEsa  = new Array();
+                    var msg     = new String();
+                    var dec     = new Number();
+                    dec = decimale;
+                    if(Number(decimale)) {
+                        if(decimale.includes(".")) {
+                            // intero = parseInt(decimale) * 100;
+                            cn.table(
+                                {
+                                    messaggio : "Non è un numero decimale. perchè non è un numero intero.",
+                                    error : `${dec}`
+                                }
+                            )
+                            fnc.showMyAlert("ATTENZIONE", `${dec} non è un numero decimale. perchè non è un numero intero.`, 'var(--danger)', 'var(--warning)', 'var(--warning)', 'var(--dark)');
+                        } else {
+                           while(decimale > 0) {
+                                numB = parseInt(decimale / 16);
+                                numC = parseInt(numB * 16);
+                                numD = parseInt(decimale - numC);
+                                cn.info(`B = ${numB} C = ${numD}`);
+                                arrEsa.push(alfanumerico[numD]); 
+                                decimale = parseInt(decimale / 16);
+                           }// ./while
+                           
+                            cn.table(
+                                {
+                                    messaggio : msg,
+                                    esadecimale : arrEsa.reverse()//arr.sort()
+                                }
+                            )
+                            
+                        // cn.info(alfanumerico[3]);
+                        createEsa(arrEsa, dec, '.grid-add-esadecimale', "decimale a esadecimale", "decimale");
+                        }
+                    } else {
+                        cn.table(
+                            {
+                                messaggio : "Non è un numero decimale",
+                                error : decimale
+                            }
+                        )
+                        fnc.showMyAlert("ATTENZIONE", `${dec} non è un numero decimale.`, 'var(--danger)', 'var(--warning)', 'var(--warning)', 'var(--dark)');
+                    }
+                }// ./if decimale != ""
+            }// ./try
+            catch(Exception) {
+                console.error(`Messaggio di errore: ${Exception.message}`);
+            }
+        }// ./calcoloEsa
+        // calcoloDec
+        var arrDec = new Array;
+        var arrDecDefault = new Array;
+        async function calcoloDec() {
+            try {
+                console.clear();
+                var question = document.querySelector('.value-esadecimale').value;//prompt("Scrivi il valore esadecimale solo alfanumerico e senza spazi es. 22A o 22a");
+                var regEx = /^[0-9a-zA-Z]+$/;
+                if(question.match(regEx)) {
+                    //cn.info(`${question} arrDec ${arrDec}`);
+                    var orderReverse = arrDec.reverse();
+                    var converNum   = new Number();
+                    var base16      = 1;
+                    for(var x = 0; x < orderReverse.length; x++) {
+                        switch(orderReverse[x].toUpperCase()) {
+                            case "A":
+                                converNum += 10 * base16;                               
+                                break;
+                            case "B":
+                                converNum += 11 * base16;
+                                break;
+                            case "C":
+                                converNum += 12 * base16;                               
+                                break;
+                            case "D":
+                                converNum += 13 * base16;                                
+                                break;
+                            case "E":
+                                converNum += 14 * base16;                            
+                                break;
+                            case "F":
+                                converNum += 15 * base16;                                
+                                break;
+                            default:
+                                converNum += orderReverse[x] * base16;
+                                break;
+                        }// ./switch
+                        base16 = base16 * 16;
+                    }// ./for
+                    createDec(arrDecDefault, question, converNum, '.grid-add-decimale', "esadecimale a decimale", "esadecimale");
+                    // cn.warn(`variabile converNum: ${converNum} base16 = ${base16}`);
+                    // svuoto le variabili
+                    esa             = String();
+                    arrDec          = Array();
+                    arrDecDefault   = Array();
+                } else {
+                    //cn.warn("Errore. Il valore inserito non è alfanumerico.")
+                    fnc.showMyAlert("ATTENZIONE", `${question} formato non corretto o campo vuoto. no spazi`, 'var(--danger)', 'var(--warning)', 'var(--warning)', 'var(--dark)');
+                    return false;
+                }
+            } catch(Exception) {
+                cn.table(
+                    {
+                        message : Exception.message,
+                        name : Exception.name
+                    }
+                )// ./cn
+            }
+        }// ./calcoloDec
+        // create view table esadecimale
+        var repeatCallEsa = new Number();
+        async function createEsa(arr, esa, classTable, titleTable, titleTable2){
+            try {
+                var i = new Number();
+                repeatCallEsa += 1;
+                const div       = document.querySelector(`${classTable}`);
+                div.style.setProperty('visibility', 'visible');
+                let tbl         = document.createElement('table');
+                let titleTbl    = document.createElement('caption');
+                let headTbl     = document.createElement('thead');
+                let trHead      = document.createElement('tr');
+                let bodyTbl     = document.createElement('tbody');
+                let trBody      = document.createElement('tr');
+                let tfoot       = document.createElement('tfoot');
+                let trFoot      = document.createElement('tr');
+                let tdFoot      = document.createElement('td');
+                
+                const textTitle = document.createTextNode(`${titleTable}-${repeatCallEsa}`);
+                titleTbl.appendChild(textTitle);
+                tbl.appendChild(titleTbl);
+
+
+                let tdBodyDecimale = document.createElement('td');
+                tdBodyDecimale.innerHTML = esa;
+                trBody.appendChild(tdBodyDecimale);
+
+                let thDecimale = document.createElement('th');
+                thDecimale.innerHTML = titleTable2;
+                trHead.appendChild(thDecimale);
+                while(i < arr.length) {
+                    let thHead = document.createElement('th');
+                    thHead.innerHTML = `unità ${i}`;
+                    trHead.appendChild(thHead);
+                    let tdBody = document.createElement('td');
+                    //arr.reverse();
+                    tdBody.innerHTML = arr[i];
+                    trBody.appendChild(tdBody);
+                    i++;
+                }
+                headTbl.appendChild(trHead);
+                bodyTbl.appendChild(trBody);
+
+                tdFoot.colSpan = arr.length + 1;
+                tdFoot.innerHTML = "conversione da decimale a esadecimale";
+                trFoot.appendChild(tdFoot);
+                tfoot.appendChild(trFoot);
+
+                tbl.appendChild(headTbl);
+                tbl.appendChild(bodyTbl);
+                tbl.appendChild(tfoot);
+                div.appendChild(tbl);
+            } catch(Exception) {
+                cn.table(
+                    {
+                        message : Exception.message,
+                        name    : Exception.name
+                    }
+                )
+            }// ./catch
+        }// ./create view table esadecimale
+        // create view table decimale
+        var repeatCallDec = new Number();
+        async function createDec(arr, dec, result, classTable, titleTable, titleTable2){
+            try {
+                var i = new Number();
+                repeatCallDec += 1;
+                const div       = document.querySelector(`${classTable}`);
+                div.style.setProperty('visibility', 'visible');
+                let tbl         = document.createElement('table');
+                let titleTbl    = document.createElement('caption');
+                let headTbl     = document.createElement('thead');
+                let trHead      = document.createElement('tr');
+                let bodyTbl     = document.createElement('tbody');
+                let trBody      = document.createElement('tr');
+                let tfoot       = document.createElement('tfoot');
+                let trFoot      = document.createElement('tr');
+                let tdFoot      = document.createElement('td');
+                
+                const textTitle = document.createTextNode(`${titleTable}-${repeatCallDec}`);
+                titleTbl.appendChild(textTitle);
+                tbl.appendChild(titleTbl);
+               
+                let thEsadecimale = document.createElement('th');
+                thEsadecimale.innerHTML = titleTable2;
+                trHead.appendChild(thEsadecimale);
+
+                let thDecimale = document.createElement('th');
+                thDecimale.innerHTML = "decimale";
+                trHead.appendChild(thDecimale);
+                
+                let tdBodyEsadecimale = document.createElement('td');
+                tdBodyEsadecimale.innerHTML = dec;
+                trBody.appendChild(tdBodyEsadecimale);
+
+                let tdBodyDecimale = document.createElement('td');
+                tdBodyDecimale.innerHTML = result;
+                trBody.appendChild(tdBodyDecimale);
+
+                tdFoot.colSpan = 2;
+                tdFoot.innerHTML = "conversione da esadecimale a decimale";
+                trFoot.appendChild(tdFoot);
+                tfoot.appendChild(trFoot);
+
+
+                headTbl.appendChild(trHead);
+                bodyTbl.appendChild(trBody);
+                tbl.appendChild(headTbl);
+                tbl.appendChild(bodyTbl);
+                tbl.appendChild(tfoot);
+                div.appendChild(tbl);
+            } catch(Exception) {
+                cn.table(
+                    {
+                        message : Exception.message,
+                        name    : Exception.name
+                    }
+                )
+            }// ./catch
+        }// ./create view table decimale
+        // verifyKeyUp
+        var esa = new String();
+        async function verifyKeyUp() {
+            switch(event.keyCode) {
+                /*
+                case 16:
+                    cn.info("Hai premuto SHIFT");
+                    break;
+                */
+                // BACKSPACE (cancella)
+                case 8:
+                    // cn.info("Hai premuto BACKSPACE");
+                    esa = esa.slice(0, -1);
+                    arrDec.pop();
+                    arrDecDefault.pop();
+                    break;
+                case 32:
+                    // annullo l'azione
+                    cn.info("Hai premuto SPACE");
+                    //esa = esa.slice(0, -1);
+                    valueInput.value = "";
+                    valueInput.value = esa;
+                    break;
+                default:
+                    var keyUp =  event.key.toUpperCase();
+                    for(var i = 0; i < alfanumerico.length; i++) {
+                        if(keyUp == alfanumerico[i]) {
+                            esa += keyUp;
+                            valueInput.value = esa;
+                            arrDec.push(keyUp);
+                            arrDecDefault.push(keyUp);
+                            cn.info(`esa ${esa} ${event.keyCode} arrDec ${arrDec} arrDefault ${arrDecDefault}`);
+                            return false;
+                        } else {
+                            valueInput.value = esa;
+                            cn.error(`not value ${keyUp} ${event.keyCode}`);
+                        }
+                    }// ./for
+                    break;
+            }// ./switch
+        }// ./// verifyKeyUp
+        // clear DOM
+      async function domClear() {
+            try{
+                valueInput.value = "";
+                // await window.location.reload();
+                const url = new URL(window.location.href);
+               await window.location.assign(`${location.pathname}${location.search}`);
+            } catch(Exception) {
+                cn.table(
+                    {
+                        message : Exception.message,
+                        name : Exception.name,
+                        linea : Exception.lineNumber
+                    }
+                )
+            }
+
+        }
+        // ./clear DOM
+        function allParams() {
+            try{
+                console.clear();
+                // throw new Error("Messaggio", "Errore", 486);
+                // http://svilfi.utile.extranet.utilita.com/test/zip/study/?id=101&id2=102#pluto1,pluto2
+                const params = new URL(window.location.href).searchParams.get('id2');
+                console.table(
+                    {
+                        host : window.location.host, // svilfi.utile.extranet.utilita.com
+                        pathname : window.location.pathname, // /test/zip/study/
+                        search : window.location.search, // ?id=101&id2=102
+                        href : window.location.href, // http://svilfi.utile.extranet.utilita.com/test/zip/study/?id=101&id2=102#pluto1,pluto2
+                        search_params : params, // 102
+                        protocol : window.location.protocol, // http:
+                        port : window.location.port,
+                        hash : window.location.hash // #pluto1,pluto2
+                    }
+                )
+            } catch(Exception) {
+                console.table(
+                    {
+                        message : Exception.message,
+                        name : Exception.name,
+                        linea : Exception.lineNumber
+                    }
+                )
+            }
+        }// ./allParams
+       // allParams();
+    </script>
+</body>
+</html>
